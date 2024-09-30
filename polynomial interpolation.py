@@ -1,9 +1,8 @@
 import matplotlib
 from sympy import symbols
 
-data_set = []
-
 def polynomial_interpolation(y):
+    data_set = []
     x = symbols("x")
     p = 0
     for z in range(y):
