@@ -1,7 +1,7 @@
 import matplotlib as plt
 from sympy import symbols
 
-
+print("ola")
 def l_func(x_values, x, degree):
     l = 1
     x = symbols("x")
