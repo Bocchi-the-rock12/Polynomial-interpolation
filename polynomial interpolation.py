@@ -24,20 +24,25 @@ def graph_plot(x, y, p, f):
     plt.figure(figsize=(11, 8))
     manager = plt.get_current_fig_manager()
     manager.window.title("Lagrange Polynomial Interpolation")
-    plt.xlabel("x", fontsize=1)
-    plt.ylabel("y",  fontsize=1)
+    plt.xlabel("X-axis", fontsize=12)
+    plt.ylabel("Y-axis", fontsize=12)
     plt.title("Polynomial Interpolation", fontsize=16, fontweight="bold")
-    x_values = linspace(min(x), max(x), 10)
-    y_values = [polynomial_interpolation(x, y, f).subs('x', val) for val in x_values]
+    plt.xlim(min(x), max(x))
+    plt.ylim(min(y), max(y))
+    plt.axhline(0, color="black", linewidth=2, ls="-")
+    plt.axvline(0, color="black", linewidth=2, ls="-")
+    x_values = linspace(min(x), max(x), 1000)
+    y_values = [polynomial_interpolation(x, y, f).subs("x", val) for val in x_values]
     y_values = [float(val) for val in y_values]
     plt.plot(x_values, y_values)
+    plt.gca().set_aspect('equal', adjustable='box')
     plt.show()
 
 
 def main():
     x_data_set = []
     y_data_set = []
-    n = int(input("> "))
+    n = int(input("Insert the degree of your polynomial: "))
     # get x, y data from user
     for z in range(n + 1):
         xi = int(input(f"Insert x value: "))
