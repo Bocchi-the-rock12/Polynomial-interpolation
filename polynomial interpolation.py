@@ -21,7 +21,7 @@ def polynomial_interpolation(x_var, y, z):
 
 
 def graph_plot(x, y, p, f):
-    plt.figure(figsize=(11, 8))
+    plt.figure("Polynomial Interpolation", figsize=(11, 8))
     plt.grid()
     plt.xlabel("X-axis", fontsize=12)
     plt.ylabel("Y-axis", fontsize=12)
@@ -49,8 +49,8 @@ def main():
 
     # Get x, y data from user
     for z in range(n + 1):
-        xi = int(input(f"Insert x value: "))
-        yi = int(input(f"Insert y value: "))
+        xi = float(input(f"Insert x value: "))
+        yi = float(input(f"Insert y value: "))
         x_data_set.append(xi)
         y_data_set.append(yi)
     graph_plot(x_data_set, y_data_set, simplify(polynomial_interpolation(x_data_set, y_data_set, n)), n)
