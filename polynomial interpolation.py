@@ -16,41 +16,44 @@ def l_func(x_values, k, n):
 def polynomial_interpolation(x_var, y, z):
     p = 0
     for k in range(z + 1):
-        p += y[k] * l_func(x_var, k, z) # Polynomial Calculation
+        p += y[k] * l_func(x_var, k, z)  # Polynomial Calculation
     return p
 
 
 def graph_plot(x, y, p, f):
     plt.figure(figsize=(11, 8))
-    manager = plt.get_current_fig_manager()
-    manager.window.title("Lagrange Polynomial Interpolation")
+    plt.grid()
     plt.xlabel("X-axis", fontsize=12)
     plt.ylabel("Y-axis", fontsize=12)
-    plt.title("Polynomial Interpolation", fontsize=16, fontweight="bold")
-    plt.xlim(min(x), max(x))
-    plt.ylim(min(y), max(y))
+    plt.title("Polynomial Interpolation", fontsize=20)
     plt.axhline(0, color="black", linewidth=2, ls="-")
     plt.axvline(0, color="black", linewidth=2, ls="-")
-    x_values = linspace(min(x), max(x), 1000)
+    x_values = linspace(min(x), max(x), 750)
     y_values = [polynomial_interpolation(x, y, f).subs("x", val) for val in x_values]
     y_values = [float(val) for val in y_values]
-    plt.plot(x_values, y_values)
-    plt.gca().set_aspect('equal', adjustable='box')
+    plt.plot(x_values, y_values, color="Black")
+    x_min, x_max = min(x_values), max(x_values)
+    y_min, y_max = min(y_values), max(y_values)
+    x_padding = (x_max - x_min) * 0.1
+    y_padding = (y_max - y_min) * 0.1
+    plt.xlim(x_min - x_padding, x_max + x_padding)
+    plt.ylim(y_min - y_padding, y_max + y_padding)
+    plt.gcf().canvas.manager.toolbar.zoom()
     plt.show()
 
 
 def main():
     x_data_set = []
     y_data_set = []
-    n = int(input("Insert the degree of your polynomial: "))
-    # get x, y data from user
+    n = int(input("Insert the polynomial degree: "))
+
+    # Get x, y data from user
     for z in range(n + 1):
         xi = int(input(f"Insert x value: "))
         yi = int(input(f"Insert y value: "))
         x_data_set.append(xi)
         y_data_set.append(yi)
-    graph_plot(x_data_set, y_data_set, simplify(polynomial_interpolation(x_data_set, y_data_set ,n)), n)
+    graph_plot(x_data_set, y_data_set, simplify(polynomial_interpolation(x_data_set, y_data_set, n)), n)
+
 
 main()
-
-
